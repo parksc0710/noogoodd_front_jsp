@@ -13,12 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class HomeModel {
     private Long id;
-
     private String notice;
-
     private boolean act_flg;
-
     private LocalDateTime reg_dt;
-
     private LocalDateTime chg_dt;
 }

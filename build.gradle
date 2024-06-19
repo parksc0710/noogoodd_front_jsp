@@ -24,6 +24,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
