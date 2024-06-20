@@ -36,6 +36,7 @@ public class ControllerInterceptor implements HandlerInterceptor {
             ResponseEntity<UserModel> userModelResponseEntity = HttpUtils.sendPost(jwt, apiUrl, requestBody, UserModel.class);
 
             if (userModelResponseEntity != null) {
+                request.setAttribute("jwt",jwt);
                 request.setAttribute("userToken", userModelResponseEntity.getBody());
             } else {
                 invalidateCookie(response, "token");

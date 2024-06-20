@@ -3,6 +3,7 @@ package com.noogoodd.front.controller.user;
 import com.noogoodd.front.model.user.UserModel;
 import com.noogoodd.front.service.user.UserService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -71,5 +72,26 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/myinfo")
+    public String myinfo(HttpServletRequest request, Model model){
+        UserModel userToken = (UserModel) request.getAttribute("userToken");
+        if (userToken != null) {
+            model.addAttribute("userToken", userToken);
+            return "user/myinfo";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @PostMapping("/myinfo")
+    public String myinfo(HttpServletRequest request, UserModel user) {
+        String jwt = (String) request.getAttribute("jwt");
+        HttpStatusCode rtnCode = userService.update(user, jwt);
+        if(rtnCode == HttpStatus.OK) {
+            return "redirect:/";
+        } else {
+            return "redirect:/error";
+        }
+    }
 
 }

@@ -13,10 +13,10 @@
 <form action="/user/signup" method="post">
 
     <label for="email">이메일</label>
-    <input type="email" id="email" name="email" placeholder="you@example.com">
+    <input type="email" id="email" name="email" placeholder="you@example.com" required>
     <br/><br/>
     <label for="password">비밀번호</label>
-    <input type="password" id="password" name="password">
+    <input type="password" id="password" name="password" required>
     <br/><br/>
     <label for="nickname">닉네임</label>
     <input type="text" id="nickname" name="nickname">

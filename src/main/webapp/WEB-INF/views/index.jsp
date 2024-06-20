@@ -20,6 +20,8 @@
 <c:choose>
     <c:when test="${not empty userToken}">
         <p>${userToken.nickname}님 안녕하세요!</p>
+        <a href="/user/myinfo"1>회원정보수정</a>
+        <br/><br/>
         <a href="/user/signout"1>로그아웃</a>
     </c:when>
     <c:otherwise>
