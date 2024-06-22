@@ -1,5 +1,6 @@
 package com.noogoodd.front.service.user;
 
+import ch.qos.logback.core.util.StringUtil;
 import com.noogoodd.front.model.user.UserModel;
 import com.noogoodd.front.utils.HttpUtils;
 import com.noogoodd.front.utils.JsonUtils;
@@ -26,7 +27,7 @@ public class UserService {
 
         user.setUuid(UUID.randomUUID().toString());
         user.setRole("USER");
-        user.setSign_type("NORMAL");
+        if(StringUtil.isNullOrEmpty(user.getSign_type())) user.setSign_type("NORMAL");
         user.setAct_flg(true);
 
         String apiUrlSuffix = "/register";
@@ -53,6 +54,21 @@ public class UserService {
         } else {
             return HttpStatus.BAD_REQUEST;
         }
+    }
+
+    public HttpStatusCode withdraw(UserModel user, String jwt) {
+        user.setRole("");
+        user.setAct_flg(false);
+        String apiUrlSuffix = "/update";
+        String apiUrl = apiDomain + apiUrlPreFix + apiUrlSuffix;
+        String requestBody = JsonUtils.toJson(user);
+
+        ResponseEntity<String> response = HttpUtils.sendPost(jwt, apiUrl, requestBody, String.class);
+        if(response != null && response.getStatusCode() == HttpStatus.OK) {
+            return HttpStatusCode.valueOf(response .getStatusCode().value());
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
 
     }
 
@@ -69,5 +85,15 @@ public class UserService {
 
           return HttpUtils.sendPost("", apiUrl, requestBody, String.class);
     }
+
+    public ResponseEntity<String> sns_login(String provide, String code) {
+
+        String apiSnsLoginUrlPreFix = "/sns-login";
+        String apiUrlSuffix = "/" + provide;
+        String apiUrl = apiDomain + apiSnsLoginUrlPreFix + apiUrlSuffix;
+
+        return HttpUtils.sendPost("", apiUrl, code, String.class);
+    }
+
 
 }

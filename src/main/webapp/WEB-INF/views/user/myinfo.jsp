@@ -15,9 +15,16 @@
     <label for="email">이메일</label>
     <input type="email" id="email" name="email" value="${userToken.email}" readonly>
     <br/><br/>
-    <label for="password">비밀번호</label>
-    <input type="password" id="password" name="password" required>
-    <br/><br/>
+    <c:choose>
+        <c:when test="${'NORMAL' eq userToken.sign_type}">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" required>
+            <br/><br/>
+        </c:when>
+        <c:otherwise>
+            <input type="hidden" id="password" name="password" value="">
+        </c:otherwise>
+    </c:choose>
     <label for="nickname">닉네임</label>
     <input type="text" id="nickname" name="nickname" value="${userToken.nickname}">
     <br/><br/>
@@ -44,6 +51,22 @@
     <button>수정하기</button>
 
 </form>
-
+<br/><br/>
+    <form action="/user/withdraw" method="post">
+        <div style="display: none;">
+            <input type="hidden" name="email" value="${userToken.email}" readonly>
+            <input type="hidden" name="nickname" value="${userToken.nickname}">
+            <input type="hidden" name="sign_type" value="${userToken.sign_type}" readonly>
+            <input type="radio" class="disability_yn" name="disability_yn" value="true" <c:if test="${userToken.disability_yn}">checked</c:if>> 장애인
+            <input type="radio" class="disability_yn" name="disability_yn" value="false" <c:if test="${!userToken.disability_yn}">checked</c:if>> 비장애인
+            <input type="radio" class="gender" name="gender" value="male" <c:if test="${userToken.gender == 'male'}">checked</c:if>> 남자
+            <input type="radio" class="gender" name="gender" value="female" <c:if test="${userToken.gender != 'male'}">checked</c:if>> 여자
+            <input type="hidden" name="disability_type" value="${userToken.disability_type}">
+            <input type="hidden" name="aid_type" value="${userToken.aid_type}">
+            <input type="hidden" name="address_area" value="${userToken.address_area}">
+            <input type="hidden" name="birth_day" value="${userToken.birth_day}">
+        </div>
+        <button type="submit">탈퇴하기</button>
+    </form>
 </body>
 </html>

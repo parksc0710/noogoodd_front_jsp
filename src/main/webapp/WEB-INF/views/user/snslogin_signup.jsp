@@ -8,15 +8,13 @@
     <script src="<c:url value='/js/common/common.js'/>"></script>
 </head>
 <body>
-<h1>일반 회원가입 페이지</h1>
+<h1>${provider} 회원가입 페이지</h1>
 
-<form action="/user/signup" method="post">
+<form action="${pageContext.request.contextPath}/user/signup" method="post">
 
     <label for="email">이메일</label>
-    <input type="email" id="email" name="email" placeholder="you@example.com" required>
-    <br/><br/>
-    <label for="password">비밀번호</label>
-    <input type="password" id="password" name="password" required>
+    <input type="email" id="email" name="email" placeholder="you@example.com" value="${email}" readonly>
+    <input type="hidden" id="password" name="password" value="" />
     <br/><br/>
     <label for="nickname">닉네임</label>
     <input type="text" id="nickname" name="nickname" required>
@@ -40,6 +38,7 @@
     <br/><br/>
     <label for="birth_day">생년월일</label>
     <input type="text" id="birth_day" name="birth_day">
+    <input type="hidden" id="sign_type" name="sign_type" value="${provider}" />
     <br/><br/><br/><br/>
     <button>가입 완료</button>
 

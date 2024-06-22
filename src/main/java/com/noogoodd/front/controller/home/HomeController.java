@@ -27,7 +27,7 @@ public class HomeController {
         }
 
         String homeModelJson = homeService.getHomeMainData(JWT);
-        if(homeModelJson != null) {
+        if (homeModelJson != null) {
             HomeModel homeModel = JsonUtils.parseJsonToModel(homeModelJson, HomeModel.class);
             model.addAttribute("homeModel", homeModel);
         }

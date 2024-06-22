@@ -20,6 +20,11 @@
     <br><br>
     <button type="submit">Login</button>
 </form>
+<br /><br /><br />
+<a href="https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URL}&response_type=code&scope=profile email">구글 로그인</a>
+<br />
+<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URL}">카카오 로그인</a>
+
 
 <script>
     document.getElementById('loginForm').addEventListener('submit', function(event) {
